@@ -1,0 +1,341 @@
+﻿<Window x:Class="ShopBudget.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:ShopBudget"
+        Language="pl-PL"
+        Title="Budżet sklepu " Height="460" Width="800" MinHeight="460" MinWidth="800" WindowStyle="None" AllowsTransparency="True" Background="Transparent" WindowStartupLocation="CenterScreen" MouseLeftButtonDown="MoveWindow" Icon="icons/budget.ico">
+    <Window.CommandBindings>
+        <CommandBinding Command="local:WPFCommands.AddEntry" CanExecute="AddEntryCanExecute" Executed="AddEntryExecuted" />
+        <CommandBinding Command="local:WPFCommands.EditEntry" CanExecute="EditEntryCanExecute" Executed="EditEntryExecuted" />
+        <CommandBinding Command="local:WPFCommands.RemoveEntry" CanExecute="RemoveEntryCanExecute" Executed="RemoveEntryExecuted" />
+        <CommandBinding Command="local:WPFCommands.ShowCharts" CanExecute="ShowChartsCanExecute" Executed="ShowChartsExecuted" />
+        <CommandBinding Command="local:WPFCommands.Redo" CanExecute="RedoCanExecute" Executed="RedoExecuted" />
+        <CommandBinding Command="local:WPFCommands.Undo" CanExecute="UndoCanExecute" Executed="UndoExecuted" />
+    </Window.CommandBindings>
+    <Window.Resources>
+        <local:AmountConverter x:Key="AmountConverter" />
+        <local:DateConverter x:Key="DateConverter" />
+        <local:ImagePathConverter x:Key="ImagePathConverter" />
+        <DataTemplate x:Key="ExpenseDataTemplate">
+            <Border Margin="0" BorderThickness="2"  CornerRadius="0">
+                <Border.BorderBrush>
+                    <LinearGradientBrush StartPoint="0, 1" EndPoint="0, 0">
+                        <GradientStop Color="SteelBlue" Offset="0.8" />
+                        <GradientStop Color="#B6FF00" Offset="0.1"/>
+                    </LinearGradientBrush>
+                </Border.BorderBrush>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Image Grid.Column="0" Grid.RowSpan="2" Stretch="Uniform" MaxHeight="48" MaxWidth="48" ToolTip="{Binding Path=Category}">
+                        <Image.Source>
+                            <Binding Path="Category">
+                                <Binding.Converter>
+                                    <local:ImagePathConverter />
+                                </Binding.Converter>
+                            </Binding>
+                        </Image.Source>
+                    </Image>
+                    <Border Grid.Column="0" Grid.RowSpan="2" BorderThickness="3" BorderBrush="Black" CornerRadius="5, 5, 5, 5" />
+                    <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Path=Name}" />
+                    <TextBlock Grid.Column="1" Grid.Row="1">
+                        <TextBlock.Text>
+                            <Binding Path="PostDate">
+                                <Binding.Converter>
+                                    <local:DateConverter />
+                                </Binding.Converter>
+                            </Binding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="IncomeDataTemplate">
+            <Border Margin="0" BorderThickness="2"  CornerRadius="0">
+                     <Border.BorderBrush>
+                        <LinearGradientBrush StartPoint="0, 1" EndPoint="0, 0">
+                            <GradientStop Color="SteelBlue" Offset="0.8" />
+                            <GradientStop Color="#FFA3E1" Offset="0.1"/>
+                        </LinearGradientBrush>
+                    </Border.BorderBrush>
+                    <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Image Grid.Column="0" Grid.RowSpan="2" Stretch="Uniform" MaxHeight="48" MaxWidth="48" ToolTip="{Binding Path=Category}">
+                        <Image.Source>
+                            <Binding Path="Category">
+                                <Binding.Converter>
+                                    <local:ImagePathConverter />
+                                </Binding.Converter>
+                            </Binding>
+                        </Image.Source>
+                    </Image>
+                    <Border Grid.Column="0" Grid.RowSpan="2" BorderThickness="3" BorderBrush="Black" CornerRadius="5, 5, 5, 5" />
+                    <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Path=Name}" />
+                    <TextBlock Grid.Column="1" Grid.Row="1">
+                        <TextBlock.Text>
+                            <Binding Path="PostDate">
+                                <Binding.Converter>
+                                    <local:DateConverter />
+                                </Binding.Converter>
+                            </Binding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="GroupingTemplate">
+            <TextBlock Text="{Binding Path=Name}" FontWeight="Light" Foreground="White" Background="DarkBlue" Padding="3" Margin="0,5,0,0"/>
+        </DataTemplate>
+    </Window.Resources>
+    <Border BorderThickness="4" CornerRadius="15, 15, 15, 15" >
+
+        <Border.BorderBrush>
+            <LinearGradientBrush StartPoint="0, 0" EndPoint="0, 1">
+                <GradientStop Color="#FFA3E1" Offset="0.9" />
+                <GradientStop Color="Azure" Offset="0"/>
+            </LinearGradientBrush>
+        </Border.BorderBrush>
+        <Border.Background>
+           <!-- <LinearGradientBrush StartPoint="0, 0" EndPoint="0.25, 1">
+                <GradientStop Color="MediumVioletRed" Offset="0.9" />
+                <GradientStop Color="DarkBlue" Offset="0"/>
+            </LinearGradientBrush>-->
+            <SolidColorBrush Color="#A5FFC5"/>
+        </Border.Background>
+
+        <DockPanel >
+            
+            <!--<DockPanel.Background>
+                <ImageBrush ImageSource="C:\Users\gosia\OneDrive\Desktop\ZTP12\ShopBudget\ShopBudget\ShopBudget\coin.jpg"/>
+            </DockPanel.Background>-->
+
+            <ToolBar DockPanel.Dock="Top" ToolBarTray.IsLocked="True" Loaded="HideArrow">
+                <ToolBar.Background>
+                    <LinearGradientBrush StartPoint="0, 1" EndPoint="0, 0">
+                        <GradientStop Color="#10C3FF" Offset="0.5" />
+                        <GradientStop Color="#A5FFC5" Offset="0"/>
+                    </LinearGradientBrush>
+
+                </ToolBar.Background>
+                <Button Name="loginButton" Click="Login" Tag="icons/login.png" ToolTip="Zaloguj/wyloguj się" Margin="3, 1, 3, 1">
+                <Image Source="{Binding Path=Tag, ElementName=loginButton, Mode=OneWay}" MaxHeight="20" MaxWidth="20" />
+                </Button>
+                <Separator Margin="3, 1, 3, 1" />
+                <Button Command="local:WPFCommands.Undo" ToolTip="Cofnij" Margin="3, 1, 3, 1">
+                    <Image Source="icons/undo.png" MaxHeight="20" MaxWidth="20" />
+                </Button>
+                <Button Command="local:WPFCommands.Redo" ToolTip="Powtórz" Margin="3, 1, 3, 1">
+                    <Image Source="icons/redo.png" MaxHeight="20" MaxWidth="20" />
+                </Button>
+                <Separator Margin="3, 1, 3, 1" />
+                <Button Name="chartButton" Command="local:WPFCommands.ShowCharts" ToolTip="Pokaż wykresy" Margin="3, 1, 3, 1">
+                    <Image Source="icons/charts.png" MaxHeight="20" MaxWidth="20" />
+                </Button>
+                <Separator Margin="3, 1, 3, 1" />
+                <Button Name="exitButton" ToolTip="Wyjdź z programu" Click="CloseWindow" >
+                    <Image Source="icons/x_icon.png" MaxHeight="20" MaxWidth="20" />
+                </Button>
+                
+            </ToolBar>
+            
+            <Grid DockPanel.Dock="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.Resources>
+                    <local:CommandsListAdapter x:Key="Entries" />
+                </Grid.Resources>
+                <ListBox Grid.Column="0" Grid.RowSpan="3" Name="postListBox" HorizontalContentAlignment="Stretch" 
+                     Margin="5" ItemsSource="{StaticResource Entries}" Focusable="False" SelectionChanged="SelectionChanged"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto" IsSynchronizedWithCurrentItem="True">
+                    <ListBox.ItemTemplateSelector>
+                        <local:EntryTemplateSelector />
+                    </ListBox.ItemTemplateSelector>
+                    <ListBox.GroupStyle>
+                        <GroupStyle HeaderTemplate="{StaticResource GroupingTemplate}" />
+                    </ListBox.GroupStyle>
+                </ListBox>
+                
+                <GroupBox Grid.Column="1" Grid.Row="0" Header="Dodaj wpis" BorderBrush="White" Margin="3">
+                   
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton GroupName="entryRadioGroup" Name="incomeRadioBtn" Tag="Income" IsChecked="True" Margin="5">Dochód</RadioButton>
+                            <RadioButton GroupName="entryRadioGroup" Name="expenseRadioBtn" Tag="Expense" Margin="5" >Wydatek</RadioButton>
+                            <Button Name="addButton" FontSize="14" Width="100" Margin="5" Padding="10, 1, 10, 1" Command="local:WPFCommands.AddEntry">_Dodaj </Button>
+                        </StackPanel>
+                    
+                </GroupBox>
+                <GroupBox Grid.Column="1" Grid.Row="1" Header="Modyfikuj wpis" BorderBrush="White" Margin="3">
+                    <StackPanel>
+                        <Button Name="editButton" Margin="5" Padding="10, 1, 10, 1" Command="local:WPFCommands.EditEntry">_Edytuj</Button>
+                        <Button Name="removeButton" Margin="5" Padding="10, 1, 10, 1" Command="local:WPFCommands.RemoveEntry">_Usuń</Button>
+                    </StackPanel>
+                </GroupBox>
+            
+                <GroupBox Grid.Column="1" Grid.Row="2" Header="Bieżący wpis" BorderBrush="White" Margin="3">
+                    <Grid DataContext="{Binding Path=SelectedItem, ElementName=postListBox}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Column="0" Grid.Row="0">Nazwa</Label>
+                        <Label Grid.Column="0" Grid.Row="1">kategoria</Label>
+                        <Label Grid.Column="0" Grid.Row="2">Opis</Label>
+                        <Label Grid.Column="0" Grid.Row="3">Data</Label>
+                        <Label Grid.Column="0" Grid.Row="4">Kwota</Label>
+                        <Label Grid.Column="1" Grid.Row="0" Name="nameLabel" Margin="3" Grid.ColumnSpan="2">
+                            <Label.Content>
+                                <Binding Path="Name">
+                                    <Binding.ValidationRules>
+                                        <ExceptionValidationRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </Label.Content>
+                        </Label>
+                        <Label Grid.Column="1" Grid.Row="1" Name="categoryLabel" Margin="3" Grid.ColumnSpan="2">
+                            <Label.Content>
+                                <Binding Path="Category">
+                                    <Binding.ValidationRules>
+                                        <ExceptionValidationRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </Label.Content>
+                        </Label>
+                        <Label Grid.Column="1" Grid.Row="2" Name="descLabel" Margin="3" Grid.ColumnSpan="2">
+                            <Label.Content>
+                                <Binding Path="Description">
+                                    <Binding.ValidationRules>
+                                        <ExceptionValidationRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </Label.Content>
+                        </Label>
+                        <Label Grid.Column="1" Grid.Row="3" Name="dateLabel" Margin="3" Grid.ColumnSpan="2">
+                            <Label.Content>
+                                <Binding Path="PostDate">
+                                    <Binding.Converter>
+                                        <local:DateConverter />
+                                    </Binding.Converter>
+                                    <Binding.ValidationRules>
+                                        <ExceptionValidationRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </Label.Content>
+                        </Label>
+                        <Label Grid.Column="1" Grid.Row="4" Name="amountLabel" Margin="3" Grid.ColumnSpan="2">
+                            <Label.Content>
+                                <Binding Path="Amount">
+                                    <Binding.Converter>
+                                        <local:AmountConverter />
+                                    </Binding.Converter>
+                                    <Binding.ValidationRules>
+                                        <ExceptionValidationRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </Label.Content>
+                        </Label>
+                        <TextBox Grid.Column="0" Grid.Row="5" Name="keyTextBox" IsEnabled="False" Margin="5" />
+                        <Button Grid.Column="1" Grid.Row="5" Name="decipherButton" IsEnabled="False" Margin="5" Padding="5, 1, 5, 1" Grid.ColumnSpan="2" Click="Decipher">Odszyfruj</Button>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Grid.Column="2" Grid.RowSpan="3" Header="Opcje listy" MinWidth="200" BorderBrush="White" Margin="3">
+                    <StackPanel>
+                        <Expander Header="Filtrowanie" Margin="5">
+                            <GroupBox Margin="1, 10, 1, 5">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Column="0" Grid.Row="0">Filtruj po:</Label>
+                                    <ComboBox Grid.Column="1" Grid.Row="0" Name="filteringComboBox" Margin="3" >
+                                        <ComboBoxItem IsSelected="True">Dochodach</ComboBoxItem>
+                                        <ComboBoxItem>Wydatkach</ComboBoxItem>
+                                    </ComboBox>
+                                    <StackPanel Grid.ColumnSpan="2" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <Button Name="applyFilterButton" Margin="3" Padding="10, 1, 10, 1" Click="FilterEntries">Filtruj</Button>
+                                        <Button Name="removeFilterButton" Margin="3" Padding="3, 1, 3, 1" Click="FilterEntries">Usuń filtr</Button>
+                                    </StackPanel>
+                                </Grid>
+                            </GroupBox>
+                        </Expander>
+                        <Expander Header="Grupowanie" Margin="5">
+                            <GroupBox Margin="1, 10, 1, 5">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Column="0" Grid.Row="0">Grupuj po:</Label>
+                                    <ComboBox Grid.Column="1" Grid.Row="0" Name="groupingComboBox" Margin="3" >
+                                        <ComboBoxItem Selected="GroupPostsByCategory" IsSelected="True"> Po kategoriach</ComboBoxItem>
+                                        <ComboBoxItem Selected="GroupPostsNone">Bez grupowania</ComboBoxItem>
+                                    </ComboBox>
+                                    
+                                </Grid>
+                            </GroupBox>
+                        </Expander>
+                        <Expander Header="Sortowanie" Margin="5">
+                            <GroupBox Margin="1, 10, 1, 5">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Column="0" Grid.Row="0">Sortuj po:</Label>
+                                    <ComboBox Grid.Column="1" Grid.Row="0" Name="sortingComboBox" Margin="3" >
+                                        <ComboBoxItem Selected="SortPostsByName" IsSelected="True">Nazwie</ComboBoxItem>
+                                        <ComboBoxItem Selected="SortPostsByDate">Dacie</ComboBoxItem>
+                                        <ComboBoxItem Selected="SortPostsNone">Bez sortowania</ComboBoxItem>
+                                    </ComboBox>
+                                    
+                                </Grid>
+                            </GroupBox>
+                        </Expander>
+                    </StackPanel>
+                </GroupBox>
+            </Grid>
+        </DockPanel>
+    </Border>
+</Window>

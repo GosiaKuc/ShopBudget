@@ -1,0 +1,346 @@
+﻿<Window x:Class="ShopBudget.ChartWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Wykresy" Height="275" Width="750" WindowStyle="None" AllowsTransparency="True" Background="Transparent" WindowStartupLocation="CenterOwner" MouseLeftButtonDown="MoveWindow">
+    <Border BorderThickness="1" CornerRadius="0, 0, 0, 0">
+        <Border.BorderBrush>
+            <LinearGradientBrush StartPoint="0, 1" EndPoint="0, 0">
+                <GradientStop Color="SteelBlue" Offset="0.8" />
+                <GradientStop Color="#FFA3E1" Offset="0.1"/>
+            </LinearGradientBrush>
+        </Border.BorderBrush>
+        <Border.Background>
+            <LinearGradientBrush StartPoint="0, 1" EndPoint="0, 0">
+                <GradientStop Color="#E3FFDF" Offset="0.3" />
+                <GradientStop Color="#A5FFC5" Offset="0.1"/>
+            </LinearGradientBrush>
+        </Border.Background>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0" Grid.Row="0">Wykres dochodów</Label>
+            <Grid Grid.Column="2" Grid.RowSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label Grid.Column="0" Grid.Row="0" Margin="0, 0, 35, 0">Wykres wydatków</Label>
+                <Button Grid.Column="1" Grid.Row="0" Name="closeButton" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Right" Margin="0, 3, 5, 0" Click="HideWindow">
+                    <Image Source="icons/x_icon.png" MaxHeight="18" MaxWidth="18"/>
+                </Button>
+                <Canvas Grid.ColumnSpan="2" Grid.Row="1" Name="expensesChartCanvas" Margin="5">
+                    <Canvas.Background>
+                        <LinearGradientBrush StartPoint="0, 0" EndPoint="0, 1">
+                            <GradientStop Color="Gray" Offset="2.5" />
+                            <GradientStop Color="White" Offset="0" />
+                        </LinearGradientBrush>
+                    </Canvas.Background>
+                    <Rectangle Width="8" Height="1" Canvas.Top="209" Fill="Black" />
+                    <Rectangle Width="8" Height="1" Canvas.Top="189" Fill="Black" />
+                    <Rectangle Width="8" Height="1" Canvas.Top="169" Fill="Black" />
+                    <Rectangle Width="8" Height="1" Canvas.Top="149" Fill="Black" />
+                    <Rectangle Width="8" Height="1" Canvas.Top="129" Fill="Black" />
+                    <Rectangle Width="8" Height="1" Canvas.Top="109" Fill="Black" />
+                    <Rectangle Width="8" Height="1" Canvas.Top="089" Fill="Black" />
+                    <Rectangle Width="8" Height="1" Canvas.Top="069" Fill="Black" />
+                    <Rectangle Width="8" Height="1" Canvas.Top="049" Fill="Black" />
+                    <Rectangle Width="8" Height="1" Canvas.Top="029" Fill="Black" />
+                    <Rectangle Width="8" Height="1" Canvas.Top="009" Fill="Black" />
+                    <Rectangle Width="249" Height="1" Canvas.Left="8" Canvas.Top="009" Opacity="0.3">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 0">
+                                <GradientStop Color="White" Offset="1.5" />
+                                <GradientStop Color="SteelBlue" Offset="0.0" />
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Rectangle Width="249" Height="1" Canvas.Left="8" Canvas.Top="029" Opacity="0.3">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 0">
+                                <GradientStop Color="White" Offset="1.5" />
+                                <GradientStop Color="SteelBlue" Offset="0.0" />
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Rectangle Width="249" Height="1" Canvas.Left="8" Canvas.Top="049" Opacity="0.3">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 0">
+                                <GradientStop Color="White" Offset="1.5" />
+                                <GradientStop Color="SteelBlue" Offset="0.0" />
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Rectangle Width="249" Height="1" Canvas.Left="8" Canvas.Top="069" Opacity="0.3">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 0">
+                                <GradientStop Color="White" Offset="1.5" />
+                                <GradientStop Color="SteelBlue" Offset="0.0" />
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Rectangle Width="249" Height="1" Canvas.Left="8" Canvas.Top="089" Opacity="0.3">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 0">
+                                <GradientStop Color="White" Offset="1.5" />
+                                <GradientStop Color="SteelBlue" Offset="0.0" />
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Rectangle Width="249" Height="1" Canvas.Left="8" Canvas.Top="109" Opacity="0.3">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 0">
+                                <GradientStop Color="White" Offset="1.5" />
+                                <GradientStop Color="SteelBlue" Offset="0.0" />
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Rectangle Width="249" Height="1" Canvas.Left="8" Canvas.Top="129" Opacity="0.3">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 0">
+                                <GradientStop Color="White" Offset="1.5" />
+                                <GradientStop Color="SteelBlue" Offset="0.0" />
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Rectangle Width="249" Height="1" Canvas.Left="8" Canvas.Top="149" Opacity="0.3">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 0">
+                                <GradientStop Color="White" Offset="1.5" />
+                                <GradientStop Color="SteelBlue" Offset="0.0" />
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Rectangle Width="249" Height="1" Canvas.Left="8" Canvas.Top="169" Opacity="0.3">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 0">
+                                <GradientStop Color="White" Offset="1.5" />
+                                <GradientStop Color="SteelBlue" Offset="0.0" />
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Rectangle Width="249" Height="1" Canvas.Left="8" Canvas.Top="189" Opacity="0.3">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 0">
+                                <GradientStop Color="White" Offset="1.5" />
+                                <GradientStop Color="SteelBlue" Offset="0.0" />
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Rectangle Width="249" Height="1" Canvas.Left="8" Canvas.Top="209" Opacity="0.3">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 0">
+                                <GradientStop Color="White" Offset="1.5" />
+                                <GradientStop Color="SteelBlue" Offset="0.0" />
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Label Canvas.Top="-3" Canvas.Left="6" FontSize="10">22</Label>
+                    <Label Canvas.Top="17" Canvas.Left="6" FontSize="10">20</Label>
+                    <Label Canvas.Top="37" Canvas.Left="6" FontSize="10">18</Label>
+                    <Label Canvas.Top="57" Canvas.Left="6" FontSize="10">16</Label>
+                    <Label Canvas.Top="77" Canvas.Left="6" FontSize="10">14</Label>
+                    <Label Canvas.Top="97" Canvas.Left="6" FontSize="10">12</Label>
+                    <Label Canvas.Top="117" Canvas.Left="6" FontSize="10">10</Label>
+                    <Label Canvas.Top="137" Canvas.Left="6" FontSize="10">8</Label>
+                    <Label Canvas.Top="157" Canvas.Left="6" FontSize="10">6</Label>
+                    <Label Canvas.Top="177" Canvas.Left="6" FontSize="10">4</Label>
+                    <Label Canvas.Top="197" Canvas.Left="6" FontSize="10">2</Label>
+                </Canvas>
+                <Rectangle Grid.ColumnSpan="2" Grid.Row="1" Stroke="Black" Margin="5" />
+            </Grid>
+            <Canvas Grid.Column="0" Grid.Row="1" Name="incomesChartCanvas" Margin="5">
+                <Canvas.Background>
+                    <LinearGradientBrush StartPoint="0, 0" EndPoint="0, 1">
+                        <GradientStop Color="Gray" Offset="2.5" />
+                        <GradientStop Color="White" Offset="0" />
+                    </LinearGradientBrush>
+                </Canvas.Background>
+                <Rectangle Width="8" Height="1" Canvas.Top="209" Fill="Black" />
+                <Rectangle Width="8" Height="1" Canvas.Top="189" Fill="Black" />
+                <Rectangle Width="8" Height="1" Canvas.Top="169" Fill="Black" />
+                <Rectangle Width="8" Height="1" Canvas.Top="149" Fill="Black" />
+                <Rectangle Width="8" Height="1" Canvas.Top="129" Fill="Black" />
+                <Rectangle Width="8" Height="1" Canvas.Top="109" Fill="Black" />
+                <Rectangle Width="8" Height="1" Canvas.Top="089" Fill="Black" />
+                <Rectangle Width="8" Height="1" Canvas.Top="069" Fill="Black" />
+                <Rectangle Width="8" Height="1" Canvas.Top="049" Fill="Black" />
+                <Rectangle Width="8" Height="1" Canvas.Top="029" Fill="Black" />
+                <Rectangle Width="8" Height="1" Canvas.Top="009" Fill="Black" />
+                <Rectangle Width="249" Height="1" Canvas.Left="8" Canvas.Top="009" Opacity="0.3">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 0">
+                            <GradientStop Color="White" Offset="1.5" />
+                            <GradientStop Color="SteelBlue" Offset="0.0" />
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Rectangle Width="249" Height="1" Canvas.Left="8" Canvas.Top="029" Opacity="0.3">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 0">
+                            <GradientStop Color="White" Offset="1.5" />
+                            <GradientStop Color="SteelBlue" Offset="0.0" />
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Rectangle Width="249" Height="1" Canvas.Left="8" Canvas.Top="049" Opacity="0.3">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 0">
+                            <GradientStop Color="White" Offset="1.5" />
+                            <GradientStop Color="SteelBlue" Offset="0.0" />
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Rectangle Width="249" Height="1" Canvas.Left="8" Canvas.Top="069" Opacity="0.3">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 0">
+                            <GradientStop Color="White" Offset="1.5" />
+                            <GradientStop Color="SteelBlue" Offset="0.0" />
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Rectangle Width="249" Height="1" Canvas.Left="8" Canvas.Top="089" Opacity="0.3">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 0">
+                            <GradientStop Color="White" Offset="1.5" />
+                            <GradientStop Color="SteelBlue" Offset="0.0" />
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Rectangle Width="249" Height="1" Canvas.Left="8" Canvas.Top="109" Opacity="0.3">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 0">
+                            <GradientStop Color="White" Offset="1.5" />
+                            <GradientStop Color="SteelBlue" Offset="0.0" />
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Rectangle Width="249" Height="1" Canvas.Left="8" Canvas.Top="129" Opacity="0.3">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 0">
+                            <GradientStop Color="White" Offset="1.5" />
+                            <GradientStop Color="SteelBlue" Offset="0.0" />
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Rectangle Width="249" Height="1" Canvas.Left="8" Canvas.Top="149" Opacity="0.3">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 0">
+                            <GradientStop Color="White" Offset="1.5" />
+                            <GradientStop Color="SteelBlue" Offset="0.0" />
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Rectangle Width="249" Height="1" Canvas.Left="8" Canvas.Top="169" Opacity="0.3">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 0">
+                            <GradientStop Color="White" Offset="1.5" />
+                            <GradientStop Color="SteelBlue" Offset="0.0" />
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Rectangle Width="249" Height="1" Canvas.Left="8" Canvas.Top="189" Opacity="0.3">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 0">
+                            <GradientStop Color="White" Offset="1.5" />
+                            <GradientStop Color="SteelBlue" Offset="0.0" />
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Rectangle Width="249" Height="1" Canvas.Left="8" Canvas.Top="209" Opacity="0.3">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 0">
+                            <GradientStop Color="White" Offset="1.5" />
+                            <GradientStop Color="SteelBlue" Offset="0.0" />
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Label Canvas.Top="-3" Canvas.Left="6" FontSize="10">22</Label>
+                <Label Canvas.Top="17" Canvas.Left="6" FontSize="10">20</Label>
+                <Label Canvas.Top="37" Canvas.Left="6" FontSize="10">18</Label>
+                <Label Canvas.Top="57" Canvas.Left="6" FontSize="10">16</Label>
+                <Label Canvas.Top="77" Canvas.Left="6" FontSize="10">14</Label>
+                <Label Canvas.Top="97" Canvas.Left="6" FontSize="10">12</Label>
+                <Label Canvas.Top="117" Canvas.Left="6" FontSize="10">10</Label>
+                <Label Canvas.Top="137" Canvas.Left="6" FontSize="10">8</Label>
+                <Label Canvas.Top="157" Canvas.Left="6" FontSize="10">6</Label>
+                <Label Canvas.Top="177" Canvas.Left="6" FontSize="10">4</Label>
+                <Label Canvas.Top="197" Canvas.Left="6" FontSize="10">2</Label>
+            </Canvas>
+            <Rectangle Grid.Column="0" Grid.Row="1" Stroke="Black" Margin="5" />
+            <Border Grid.Column="1" Grid.Row="1" BorderThickness="1" Background="Transparent">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Column="0" Grid.Row="0">
+                        <Label HorizontalAlignment="Right" Margin="4">Sprzedaż odzieży</Label>
+                        <Label HorizontalAlignment="Right" Margin="4">Sprzedaż obuwia</Label>
+                        <Label HorizontalAlignment="Right" Margin="4">Sprzedaż biżuterii</Label>
+                        <Label HorizontalAlignment="Right" Margin="4">Inne</Label>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Grid.Row="0">
+                        <Rectangle Width="30" Height="20" Margin="4, 8">
+                            <Rectangle.Fill>
+                                <LinearGradientBrush StartPoint="0, 1" EndPoint="0, 0">
+                                    <GradientStop Color="Red" Offset="1.5" />
+                                    <GradientStop Color="Yellow" Offset="0" />
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Rectangle Width="30" Height="20" Margin="4, 6">
+                            <Rectangle.Fill>
+                                <LinearGradientBrush StartPoint="0, 1" EndPoint="0, 0">
+                                    <GradientStop Color="Green" Offset="1.5" />
+                                    <GradientStop Color="LimeGreen" Offset="0" />
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Rectangle Width="30" Height="20" Margin="4, 7">
+                            <Rectangle.Fill>
+                                <LinearGradientBrush StartPoint="0, 1" EndPoint="0, 0">
+                                    <GradientStop Color="Blue" Offset="1.5" />
+                                    <GradientStop Color="Violet" Offset="0" />
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Rectangle Width="30" Height="20" Margin="4, 8">
+                            <Rectangle.Fill>
+                                <LinearGradientBrush StartPoint="0, 1" EndPoint="0, 0">
+                                    <GradientStop Color="Orange" Offset="1.5" />
+                                    <GradientStop Color="LightYellow" Offset="0" />
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" Grid.Row="0">
+                        <Label HorizontalAlignment="Left" Margin="4">Czynsz</Label>
+                        <Label HorizontalAlignment="Left" Margin="4">Zakup produktów</Label>
+                        <Label HorizontalAlignment="Left" Margin="4">Opłata pracowników</Label>
+                        <Label HorizontalAlignment="Left" Margin="4">Inne</Label>
+                    </StackPanel>
+                    <StackPanel Grid.ColumnSpan="3" Grid.Row="1" Orientation="Horizontal">
+                        <Label VerticalAlignment="Center">Bilans: </Label>
+                        <Label Name="balanceLabel" VerticalAlignment="Center">0 zł</Label>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

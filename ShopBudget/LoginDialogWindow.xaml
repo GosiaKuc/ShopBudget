@@ -1,0 +1,45 @@
+﻿<Window x:Class="ShopBudget.LoginDialogWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Logowanie" Height="130" Width="260" MinHeight="130" MinWidth="260" MaxHeight="150" MaxWidth="280" WindowStyle="None" AllowsTransparency="True" Background="Transparent" WindowStartupLocation="CenterOwner">
+    <Window.Resources>
+        <ControlTemplate x:Key="buttonTemplate" TargetType="{x:Type Button}">
+            <Border BorderBrush="BurlyWood"  BorderThickness="1" CornerRadius="4 4 4 4" Padding="10, 1, 10, 1" Background="#ce394f" TextBlock.Foreground="White" >
+                <ContentPresenter RecognizesAccessKey="True" HorizontalAlignment="Center" Margin="5" />
+            </Border>
+        </ControlTemplate>
+    </Window.Resources>
+    <Border BorderThickness="2" CornerRadius="5, 5, 0, 0">
+        <Border.BorderBrush>
+            <LinearGradientBrush StartPoint="0, 1" EndPoint="0, 0">
+                <GradientStop Color="SteelBlue" Offset="0.8" />
+                <GradientStop Color="#FFA3E1" Offset="0.1"/>
+            </LinearGradientBrush>
+        </Border.BorderBrush>
+        <Border.Background>
+            <LinearGradientBrush StartPoint="0, 1" EndPoint="0, 0">
+                <GradientStop Color="#E3FFDF" Offset="0.3" />
+                <GradientStop Color="#A5FFC5" Offset="0.1"/>
+            </LinearGradientBrush>
+        </Border.Background>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0" Grid.Row="0" Margin="5">Login</Label>
+            <Label Grid.Column="0" Grid.Row="1" Margin="5" >Hasło</Label>
+            <TextBox Grid.Column="1" Grid.Row="0" Name="loginTextBox" Margin="5" />
+            <PasswordBox Grid.Column="1" Grid.Row="1" Name="passTextBox" Margin="5" />
+            <StackPanel Grid.ColumnSpan="2" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Name="okButton" Template="{StaticResource buttonTemplate}"   Click="Accept" IsDefault="True" >OK</Button>
+                <Button Name="cancelButton" Template="{StaticResource buttonTemplate}" Click="Accept" IsCancel="True">Anuluj</Button>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>
